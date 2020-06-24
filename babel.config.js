@@ -1,3 +1,5 @@
 module.exports = {
-	presets: ['preact-cli/babel'],
+	presets: [
+		'@babel/preset-react'
+	],
 };
