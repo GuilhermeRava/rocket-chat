@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import centered from '@storybook/addon-centered/react';
 import { storiesOf } from '@storybook/react';
-
+import React from 'react';
 import ChatIcon from '../../icons/chat.svg';
 import { Button } from '.';
 

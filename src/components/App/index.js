@@ -1,5 +1,8 @@
-import { Component } from 'preact';
-import { Router, route } from 'preact-router';
+import React, { Component } from 'react';
+import { Router, Route } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+
+
 import queryString from 'query-string';
 
 import history from '../../history';
@@ -32,6 +35,8 @@ export class App extends Component {
 	}
 
 	handleRoute = async () => {
+		let history = useHistory();
+
 		setTimeout(() => {
 			const {
 				config: {
@@ -52,12 +57,12 @@ export class App extends Component {
 			} = this.props;
 
 			if (gdprRequired && !gdprAccepted) {
-				return route('/gdpr');
+				return history.push('/gdpr');
 			}
 
 			if (!online) {
 				parentCall('callback', 'no-agent-online');
-				return route('/leave-message');
+				return history.push('/leave-message');
 			}
 
 			const showDepartment = departments.filter((dept) => dept.showOnRegistration).length > 0;
@@ -69,7 +74,7 @@ export class App extends Component {
 				&& !triggered
 				&& !(user && user.token);
 			if (showRegistrationForm) {
-				return route('/register');
+				return history.push('/register');
 			}
 		}, 100);
 	}
@@ -138,7 +143,7 @@ export class App extends Component {
 			visibility.removeListener(this.handleVisibilityChange);
 		});
 
-		I18n.on('change', this.handleLanguageChange);
+		// I18n.on('change', this.handleLanguageChange);
 	}
 
 	async initialize() {
@@ -158,7 +163,7 @@ export class App extends Component {
 		CustomFields.reset();
 		userPresence.reset();
 		visibility.removeListener(this.handleVisibilityChange);
-		I18n.off('change', this.handleLanguageChange);
+		// I18n.off('change', this.handleLanguageChange);
 	}
 
 	componentDidMount() {
@@ -170,17 +175,13 @@ export class App extends Component {
 	}
 
 	componentDidUpdate() {
-		document.dir = isRTL(I18n.t('Yes')) ? 'rtl' : 'auto';
+		// document.dir = isRTL(('Yes')) ? 'rtl' : 'auto';
 	}
 
-	render = ({
-		sound,
-		undocked,
-		minimized,
-		expanded,
-		alerts,
-		modal,
-	}, { initialized }) => {
+	render = () => {
+		const {sound, undocked, minimized, expanded, alerts, modal, } = this.props;
+		const { initialized } = this.state;
+		
 		if (!initialized) {
 			return null;
 		}
@@ -205,12 +206,26 @@ export class App extends Component {
 
 		return (
 			<Router history={history} onChange={this.handleRoute}>
-				<Chat default path="/" {...screenProps} />
-				<Register path="/register" {...screenProps} />
-				<LeaveMessage path="/leave-message" {...screenProps} />
-				<GDPRAgreement path="/gdpr" {...screenProps} />
-				<ChatFinished path="/chat-finished" {...screenProps} />
-				<SwitchDepartment path="/switch-department" {...screenProps} />
+				<Switch>
+      				<Route exact path="/">
+						<Chat {...screenProps} />
+					</Route>
+      				<Route exact path="/register">
+					  	<Register path="/register" {...screenProps} />
+					</Route>
+      				<Route exact path="/leave-message">
+					  	<LeaveMessage path="/leave-message" {...screenProps} />
+					</Route>
+      				<Route exact path="/gdpr">
+					  	<GDPRAgreement path="/gdpr" {...screenProps} />
+					</Route>
+      				<Route exact path="/chat-finished">
+					  	<ChatFinished path="/chat-finished" {...screenProps} />
+					</Route>
+      				<Route exact path="/switch-department">
+						<SwitchDepartment path="/switch-department" {...screenProps} />
+					</Route>
+				</Switch>
 			</Router>
 		);
 	}

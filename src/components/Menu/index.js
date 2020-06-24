@@ -1,15 +1,17 @@
-import { Component, h } from 'preact';
+import React, { Component } from 'react';
+
+const h = React.createElement;
 
 import { createClassName, normalizeDOMRect } from '../helpers';
 import { PopoverTrigger } from '../Popover';
 import styles from './styles.scss';
 
 
-export const Menu = ({ children, hidden, placement, ...props }) => (
-	<div className={createClassName(styles, 'menu', { hidden, placement })} {...props}>
+export const Menu = React.forwardRef(({ children, hidden, placement, ...props }, ref) => (
+	<div className={createClassName(styles, 'menu', { hidden, placement })} {...props} ref={ref}>
 		{children}
 	</div>
-);
+));
 
 
 export const Group = ({ children, title, ...props }) => (
@@ -38,10 +40,10 @@ export const Item = ({ children, primary, danger, disabled, icon, ...props }) =>
 
 class PopoverMenuWrapper extends Component {
 	state = {}
-
-	handleRef = (ref) => {
-		this.menuRef = ref;
-	}
+	menuRef = React.createRef();
+	// handleRef = (ref) => {
+	// 	this.menuRef = ref;
+	// }
 
 	handleClick = ({ target }) => {
 		if (!target.closest(`.${ styles.menu__item }`)) {
@@ -54,7 +56,7 @@ class PopoverMenuWrapper extends Component {
 
 	componentDidMount() {
 		const { triggerBounds, overlayBounds } = this.props;
-		const menuBounds = normalizeDOMRect(this.menuRef.base.getBoundingClientRect());
+		const menuBounds = normalizeDOMRect(this.menuRef.current.getBoundingClientRect());
 
 		const menuWidth = menuBounds.right - menuBounds.left;
 		const menuHeight = menuBounds.bottom - menuBounds.top;
@@ -77,16 +79,19 @@ class PopoverMenuWrapper extends Component {
 		});
 	}
 
-	render = ({ children }) => (
-		<Menu
-			ref={this.handleRef}
-			style={{ position: 'absolute', ...this.state.position }}
-			placement={this.state.placement}
-			onClickCapture={this.handleClick}
-		>
-			{children}
-		</Menu>
-	)
+	render = () => {
+		const { children } = this.props;
+		return (
+			<Menu
+				ref={this.menuRef}
+				style={{ position: 'absolute', ...this.state.position }}
+				placement={this.state.placement}
+				onClickCapture={this.handleClick}
+			>
+				{children}
+			</Menu>
+		)
+	}
 }
 
 

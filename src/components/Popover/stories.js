@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react';
 import centered from '@storybook/addon-centered/react';
 import { withKnobs, object } from '@storybook/addon-knobs';
-
+import React from 'react';
 import { Button } from '../Button';
 import { PopoverContainer, PopoverTrigger } from '.';
 

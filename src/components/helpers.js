@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { Livechat } from '../api';
 
@@ -193,5 +193,8 @@ export class MemoizedComponent extends Component {
 
 export const memo = (component) =>
 	class extends MemoizedComponent {
-		render = component
+		render() {
+			const props = this.props;
+		 	return component(props);
+		}
 	};

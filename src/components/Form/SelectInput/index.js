@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { createClassName } from '../../helpers';
 import styles from './styles.scss';

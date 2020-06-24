@@ -5,6 +5,7 @@ import { storiesOf } from '@storybook/react';
 
 import { memedIpsum } from '../../helpers.stories';
 import Modal from './component';
+import React from 'react';
 
 
 const LoremIpsum = ({ padding = '5rem', count = 5, units = 'paragraphs', ...options }) => (

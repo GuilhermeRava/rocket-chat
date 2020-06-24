@@ -18,7 +18,7 @@ export const VideoAttachment = memo(({
 			controls
 			className={createClassName(styles, 'video-attachment__inner')}
 		>
-			{I18n.t('You browser doesn\'t support video element')}
+			{('You browser doesn\'t support video element')}
 		</video>
 	</MessageBubble>
 ));

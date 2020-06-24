@@ -1,5 +1,6 @@
-import { h, cloneElement, Component } from 'preact';
-import createContext from 'preact-context';
+import React, { Component } from 'react';
+
+const h = React.createElement;
 
 import styles from './styles.scss';
 import { createClassName } from '../helpers';
@@ -50,7 +51,7 @@ export const Tooltip = ({ children, hidden = false, placement, floating = false,
 );
 
 
-const TooltipContext = createContext();
+const TooltipContext = React.createContext();
 
 
 export class TooltipContainer extends Component {
@@ -67,7 +68,8 @@ export class TooltipContainer extends Component {
 		this.setState({ tooltip: null });
 	}
 
-	render({ children }) {
+	render() {
+		const { children } = this.props;
 		return (
 			<TooltipContext.Provider value={{ ...this.state, showTooltip: this.showTooltip, hideTooltip: this.hideTooltip }}>
 				{children}
@@ -82,7 +84,7 @@ export class TooltipContainer extends Component {
 
 export const TooltipTrigger = ({ children, content, placement }) => (
 	<TooltipContext.Consumer>
-		{({ showTooltip, hideTooltip }) => cloneElement(children[0], {
+		{({ showTooltip, hideTooltip }) => h(children[0], {
 			onMouseEnter: (event) => showTooltip(event, { content, placement }),
 			onMouseLeave: (event) => hideTooltip(event),
 			onFocusCapture: (event) => showTooltip(event, { content, placement }),

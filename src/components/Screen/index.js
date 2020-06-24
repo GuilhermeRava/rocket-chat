@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { Alert } from '../Alert';
 import { Avatar } from '../Avatar';
@@ -32,93 +32,97 @@ class ScreenHeader extends Component {
 		}
 
 		if (queueInfo && queueInfo.spot && queueInfo.spot > 0) {
-			return I18n.t('Waiting queue...');
+			return ('Waiting queue...');
 		}
 
 		return title;
 	}
 
-	render = ({
-		alerts,
-		agent,
-		notificationsEnabled,
-		minimized,
-		expanded,
-		windowed,
-		onDismissAlert,
-		onEnableNotifications,
-		onDisableNotifications,
-		onMinimize,
-		onRestore,
-		onOpenWindow,
-	}) => (
-		<Header
-			ref={this.handleRef}
-			post={
-				<Header.Post>
-					{alerts && alerts.map((alert) => <Alert {...alert} onDismiss={onDismissAlert}>{alert.children}</Alert>)}
-				</Header.Post>
-			}
-			large={this.largeHeader()}
-		>
-			{agent && agent.avatar && (
-				<Header.Picture>
-					<Avatar
-						src={agent.avatar.src}
-						description={agent.avatar.description}
-						status={agent.status}
-						large={this.largeHeader()}
-						statusBorder
-					/>
-				</Header.Picture>
-			)}
+	render = () => {
+		const {
+			alerts,
+			agent,
+			notificationsEnabled,
+			minimized,
+			expanded,
+			windowed,
+			onDismissAlert,
+			onEnableNotifications,
+			onDisableNotifications,
+			onMinimize,
+			onRestore,
+			onOpenWindow,
+		} = this.props;
+		
+		return (
+			<Header
+				ref={this.handleRef}
+				post={
+					<Header.Post>
+						{alerts && alerts.map((alert) => <Alert {...alert} onDismiss={onDismissAlert}>{alert.children}</Alert>)}
+					</Header.Post>
+				}
+				large={this.largeHeader()}
+			>
+				{agent && agent.avatar && (
+					<Header.Picture>
+						<Avatar
+							src={agent.avatar.src}
+							description={agent.avatar.description}
+							status={agent.status}
+							large={this.largeHeader()}
+							statusBorder
+						/>
+					</Header.Picture>
+				)}
 
-			<Header.Content>
-				<Header.Title>{this.headerTitle()}</Header.Title>
-				{agent && agent.email && (
-					<Header.SubTitle>{agent.email}</Header.SubTitle>
-				)}
-				{agent && agent.phone && (
-					<Header.CustomField>{agent.phone}</Header.CustomField>
-				)}
-			</Header.Content>
-			<Tooltip.Container>
-				<Header.Actions>
-					<Tooltip.Trigger content={notificationsEnabled ? I18n.t('Sound is on') : I18n.t('Sound is off')}>
-						<Header.Action
-							aria-label={notificationsEnabled ? I18n.t('Disable notifications') : I18n.t('Enable notifications')}
-							onClick={notificationsEnabled ? onDisableNotifications : onEnableNotifications}
-						>
-							{notificationsEnabled
-								? <NotificationsEnabledIcon width={20} />
-								: <NotificationsDisabledIcon width={20} />
-							}
-						</Header.Action>
-					</Tooltip.Trigger>
-					{(expanded || !windowed) && (
-						<Tooltip.Trigger content={minimized ? I18n.t('Restore chat') : I18n.t('Minimize chat')}>
+				<Header.Content>
+					<Header.Title>{this.headerTitle()}</Header.Title>
+					{agent && agent.email && (
+						<Header.SubTitle>{agent.email}</Header.SubTitle>
+					)}
+					{agent && agent.phone && (
+						<Header.CustomField>{agent.phone}</Header.CustomField>
+					)}
+				</Header.Content>
+				<Tooltip.Container>
+					<Header.Actions>
+						<Tooltip.Trigger content={notificationsEnabled ? ('Sound is on') : ('Sound is off')}>
 							<Header.Action
-								aria-label={minimized ? I18n.t('Restore chat') : I18n.t('Minimize chat')}
-								onClick={minimized ? onRestore : onMinimize}
+								aria-label={notificationsEnabled ? ('Disable notifications') : ('Enable notifications')}
+								onClick={notificationsEnabled ? onDisableNotifications : onEnableNotifications}
 							>
-								{minimized
-									? <RestoreIcon width={20} />
-									: <MinimizeIcon width={20} />
+								{notificationsEnabled
+									? <NotificationsEnabledIcon width={20} />
+									: <NotificationsDisabledIcon width={20} />
 								}
 							</Header.Action>
 						</Tooltip.Trigger>
-					)}
-					{(!expanded && !windowed) && (
-						<Tooltip.Trigger content={I18n.t('Expand chat')} placement="bottom-left">
-							<Header.Action aria-label={I18n.t('Expand chat')} onClick={onOpenWindow}>
-								<OpenWindowIcon width={20} />
-							</Header.Action>
-						</Tooltip.Trigger>
-					)}
-				</Header.Actions>
-			</Tooltip.Container>
-		</Header>
-	)
+						{(expanded || !windowed) && (
+							<Tooltip.Trigger content={minimized ? ('Restore chat') : ('Minimize chat')}>
+								<Header.Action
+									aria-label={minimized ? ('Restore chat') : ('Minimize chat')}
+									onClick={minimized ? onRestore : onMinimize}
+								>
+									{minimized
+										? <RestoreIcon width={20} />
+										: <MinimizeIcon width={20} />
+									}
+								</Header.Action>
+							</Tooltip.Trigger>
+						)}
+						{(!expanded && !windowed) && (
+							<Tooltip.Trigger content={('Expand chat')} placement="bottom-left">
+								<Header.Action aria-label={('Expand chat')} onClick={onOpenWindow}>
+									<OpenWindowIcon width={20} />
+								</Header.Action>
+							</Tooltip.Trigger>
+						)}
+					</Header.Actions>
+				</Tooltip.Container>
+			</Header>
+		)
+	}
 }
 
 

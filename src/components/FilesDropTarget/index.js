@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { createClassName } from '../helpers';
 import styles from './styles.scss';
@@ -85,33 +85,38 @@ export class FilesDropTarget extends Component {
 		this.input.click();
 	}
 
-	render = ({
-		overlayed,
-		overlayText,
-		accept,
-		multiple,
-		className,
-		style = {},
-		children,
-	}, { dragLevel }) => (
-		<div
-			data-overlay-text={overlayText}
-			onDragOver={this.handleDragOver}
-			onDragEnter={this.handleDragEnter}
-			onDragLeave={this.handleDragLeave}
-			onDrop={this.handleDrop}
-			className={createClassName(styles, 'drop', { overlayed, dragover: dragLevel > 0 }, [className])}
-			style={style}
-		>
-			<input
-				ref={this.handleInputRef}
-				type="file"
-				accept={accept}
-				multiple={multiple}
-				onChange={this.handleInputChange}
-				className={createClassName(styles, 'drop__input')}
-			/>
-			{children}
-		</div>
-	)
+	render = () => { 
+		const {
+			overlayed,
+			overlayText,
+			accept,
+			multiple,
+			className,
+			style = {},
+			children,
+		} = this.props;
+		const { dragLevel } = this.state;
+
+		return (
+			<div
+				data-overlay-text={overlayText}
+				onDragOver={this.handleDragOver}
+				onDragEnter={this.handleDragEnter}
+				onDragLeave={this.handleDragLeave}
+				onDrop={this.handleDrop}
+				className={createClassName(styles, 'drop', { overlayed, dragover: dragLevel > 0 }, [className])}
+				style={style}
+			>
+				<input
+					ref={this.handleInputRef}
+					type="file"
+					accept={accept}
+					multiple={multiple}
+					onChange={this.handleInputChange}
+					className={createClassName(styles, 'drop__input')}
+				/>
+				{children}
+			</div>
+		)
+	}
 }

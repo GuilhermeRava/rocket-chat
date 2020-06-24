@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { createClassName } from '../helpers';
 import styles from './styles.scss';
@@ -20,7 +20,11 @@ export class Avatar extends Component {
 		}
 	}
 
-	render = ({ small, large, src, description, status, className, style }, { errored }) => (
+	render = () => {
+		const { small, large, src, description, status, className, style } = this.props;
+		const { errored } = this.state;
+		
+		return (
 		<div
 			aria-label="User picture"
 			className={createClassName(styles, 'avatar', { small, large, nobg: src && !errored }, [className])}
@@ -39,5 +43,6 @@ export class Avatar extends Component {
 				<span className={createClassName(styles, 'avatar__status', { small, large, status })} />
 			)}
 		</div>
-	)
+		)
+	}
 }

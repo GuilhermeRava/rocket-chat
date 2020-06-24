@@ -24,7 +24,7 @@ export const MessageSeparator = memo(({
 			<span className={createClassName(styles, 'separator__text')}>
 				{
 					(!!date && format(parseISO(date), 'MMM dd, yyyy').toUpperCase())
-					|| (unread && I18n.t('unread messages'))
+					|| (unread && ('unread messages'))
 				}
 			</span>
 		)}

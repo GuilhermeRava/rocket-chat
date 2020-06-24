@@ -18,7 +18,7 @@ import {
 	MESSAGE_TYPE_WELCOME,
 	MESSAGE_TYPE_LIVECHAT_CLOSED,
 } from '../constants';
-
+import React from 'react';
 
 const renderContent = ({ text, system, quoted, me, attachments, attachmentResolver }) => [
 	...(attachments || [])
@@ -59,13 +59,13 @@ const renderContent = ({ text, system, quoted, me, attachments, attachmentResolv
 ].filter(Boolean);
 
 const getSystemMessageText = ({ t, conversationFinishedMessage }) =>
-	(t === MESSAGE_TYPE_ROOM_NAME_CHANGED && I18n.t('Room name changed'))
-	|| (t === MESSAGE_TYPE_USER_ADDED && I18n.t('User added by'))
-	|| (t === MESSAGE_TYPE_USER_REMOVED && I18n.t('User removed by'))
-	|| (t === MESSAGE_TYPE_USER_JOINED && I18n.t('User joined'))
-	|| (t === MESSAGE_TYPE_USER_LEFT && I18n.t('User left'))
-	|| (t === MESSAGE_TYPE_WELCOME && I18n.t('Welcome'))
-	|| (t === MESSAGE_TYPE_LIVECHAT_CLOSED && (conversationFinishedMessage || I18n.t('Conversation finished')));
+	(t === MESSAGE_TYPE_ROOM_NAME_CHANGED && ('Room name changed'))
+	|| (t === MESSAGE_TYPE_USER_ADDED && ('User added by'))
+	|| (t === MESSAGE_TYPE_USER_REMOVED && ('User removed by'))
+	|| (t === MESSAGE_TYPE_USER_JOINED && ('User joined'))
+	|| (t === MESSAGE_TYPE_USER_LEFT && ('User left'))
+	|| (t === MESSAGE_TYPE_WELCOME && ('Welcome'))
+	|| (t === MESSAGE_TYPE_LIVECHAT_CLOSED && (conversationFinishedMessage || ('Conversation finished')));
 
 const getMessageUsernames = (compact, message) => {
 	if (compact || !message.u) {

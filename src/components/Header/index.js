@@ -1,6 +1,6 @@
 import styles from './styles.scss';
 import { createClassName } from '../helpers';
-
+import React from 'react';
 
 export const Header = ({
 	children,

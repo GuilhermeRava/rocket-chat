@@ -18,7 +18,7 @@ export const AudioAttachment = memo(({
 			controls
 			className={createClassName(styles, 'audio-attachment__inner')}
 		>
-			{I18n.t('You browser doesn\'t support audio element')}
+			{('You browser doesn\'t support audio element')}
 		</audio>
 	</MessageBubble>
 ));

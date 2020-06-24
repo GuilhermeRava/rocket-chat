@@ -1,34 +1,35 @@
-import { Component } from 'preact';
-import { createContext } from 'preact-context';
+import React, { Component } from 'react';
 
 import { createClassName, normalizeDOMRect } from '../helpers';
 import styles from './styles.scss';
 
 
-const PopoverContext = createContext();
+const PopoverContext = React.createContext();
 
 
-const PopoverOverlay = ({ children, className, visible, ...props }) => (
+const PopoverOverlay = React.forwardRef(({ children, className, visible, ...props }, ref) => (
 	<div
 		className={createClassName(styles, 'popover__overlay', { visible }, [className])}
+		ref={ref}
 		{...props}
 	>
 		{children}
 	</div>
-);
+));
 
 
 export class PopoverContainer extends Component {
 	state = {
 		renderer: null,
 	}
+	overlayRef = React.createRef()
 
 	open = (renderer, props, { currentTarget } = {}) => {
 		let overlayBounds;
 		let triggerBounds;
 
-		if (this.overlayRef) {
-			overlayBounds = normalizeDOMRect(this.overlayRef.base.getBoundingClientRect());
+		if (this.overlayRef && this.overlayRef.current) {
+			overlayBounds = normalizeDOMRect(this.overlayRef.current.getBoundingClientRect());
 		}
 
 		if (currentTarget) {
@@ -58,9 +59,9 @@ export class PopoverContainer extends Component {
 		this.dismiss();
 	}
 
-	handleOverlayRef = (ref) => {
-		this.overlayRef = ref;
-	}
+	// handleOverlayRef = (ref) => {
+	// 	this.overlayRef = ref;
+	// }
 
 	componentDidMount() {
 		this.mounted = true;
@@ -72,12 +73,16 @@ export class PopoverContainer extends Component {
 		window.removeEventListener('keydown', this.handleKeyDown, false);
 	}
 
-	render = ({ children }, { renderer, overlayProps, overlayBounds, triggerBounds }) => (
+	render = () => {
+		const { children } = this.props;
+		const { renderer, overlayProps, overlayBounds, triggerBounds } = this.state;
+
+		return(
 		<PopoverContext.Provider value={{ open: this.open }}>
 			<div className={createClassName(styles, 'popover__container')}>
 				{children}
 				<PopoverOverlay
-					ref={this.handleOverlayRef}
+					ref={this.overlayRef}
 					onMouseDown={this.handleOverlayGesture}
 					onTouchStart={this.handleOverlayGesture}
 					visible={!!renderer}
@@ -88,6 +93,7 @@ export class PopoverContainer extends Component {
 			</div>
 		</PopoverContext.Provider>
 	)
+	}
 }
 
 

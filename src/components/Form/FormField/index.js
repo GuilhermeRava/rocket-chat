@@ -1,8 +1,9 @@
-import { cloneElement } from 'preact';
+import React from 'react';
 
 import { createClassName } from '../../helpers';
 import styles from './styles.scss';
 
+const h = React.createElement;
 
 export const FormField = ({
 	required,

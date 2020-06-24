@@ -1,7 +1,7 @@
 import centered from '@storybook/addon-centered/react';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-
+import React from 'react';
 import Tooltip, { withTooltip } from '.';
 import { Button } from '../Button';
 

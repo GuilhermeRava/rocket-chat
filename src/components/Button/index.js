@@ -1,6 +1,6 @@
+import React from 'react';
 import { createClassName, memo } from '../helpers';
 import styles from './styles.scss';
-
 
 const handleMouseUp = ({ target }) => target.blur();
 

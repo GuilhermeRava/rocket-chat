@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 
 import { avatarResolver } from '../../../helpers.stories';
 import { TypingIndicator } from '.';
+import React from 'react';
 
 
 storiesOf('Messages|TypingIndicator', module)

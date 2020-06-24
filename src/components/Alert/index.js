@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { createClassName } from '../helpers';
 import CloseIcon from '../../icons/close.svg';
@@ -27,27 +27,31 @@ export class Alert extends Component {
 		clearTimeout(this.dismissTimeout);
 	}
 
-	render = ({ success, warning, error, color, hideCloseButton, className, style = {}, children }) => (
-		<div
-			role="alert"
-			className={createClassName(styles, 'alert', { success, warning, error }, [className])}
-			style={{
-				...style,
-				...color && { backgroundColor: color },
-			}}
-		>
-			<div className={createClassName(styles, 'alert__content')}>
-				{children}
-			</div>
-			{!hideCloseButton && (
-				<button
-					onClick={this.handleDismiss}
-					className={createClassName(styles, 'alert__close')}
-					aria-label={I18n.t('Dismiss this alert')}
+	render() {
+		const { success, warning, error, color, hideCloseButton, className, style = {}, children } = this.props;
+
+		return (
+			<div
+				role="alert"
+				className={createClassName(styles, 'alert', { success, warning, error }, [className])}
+				style={{
+					...style,
+					...color && { backgroundColor: color },
+				}}
 				>
-					<CloseIcon width={20} />
-				</button>
-			)}
+				<div className={createClassName(styles, 'alert__content')}>
+					{children}
+				</div>
+				{!hideCloseButton && (
+					<button
+						onClick={this.handleDismiss}
+						className={createClassName(styles, 'alert__close')}
+						aria-label={('Dismiss this alert')}
+					>
+						{/* <CloseIcon width={20} /> */}
+					</button>
+				)}
 		</div>
-	)
+		)
+	}
 }

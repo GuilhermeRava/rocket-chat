@@ -1,11 +1,11 @@
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, color, object, text } from '@storybook/addon-knobs';
-
 import { screenCentered } from '../../helpers.stories';
 import { FooterOptions } from '../Footer';
 import Menu from '../Menu';
 import { Screen } from '.';
+import React from 'react';
 
 
 const alerts = [
@@ -328,9 +328,9 @@ storiesOf('Components|Screen/Footer', module)
 				options={
 					<FooterOptions>
 						<Menu.Group>
-							<Menu.Item onClick={action('changeDepartment')}>{I18n.t('Change department')}</Menu.Item>
-							<Menu.Item onClick={action('removeUserData')}>{I18n.t('Forget/Remove my data')}</Menu.Item>
-							<Menu.Item danger onClick={action('finishChat')}>{I18n.t('Finish this chat')}</Menu.Item>
+							<Menu.Item onClick={action('changeDepartment')}>{('Change department')}</Menu.Item>
+							<Menu.Item onClick={action('removeUserData')}>{('Forget/Remove my data')}</Menu.Item>
+							<Menu.Item danger onClick={action('finishChat')}>{('Finish this chat')}</Menu.Item>
 						</Menu.Group>
 					</FooterOptions>
 				}

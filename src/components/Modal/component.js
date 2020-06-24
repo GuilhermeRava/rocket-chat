@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import styles from './styles.scss';
 import { createClassName } from '../helpers';
@@ -46,17 +46,20 @@ export class Modal extends Component {
 		window.removeEventListener('keydown', this.handleKeyDown, false);
 	}
 
-	render = ({ children, animated, open, ...props }) => (
-		open ? (
-			<div
-				onTouchStart={this.handleTouchStart}
-				onMouseDown={this.handleMouseDown}
-				className={createClassName(styles, 'modal__overlay')}
-			>
-				<div className={createClassName(styles, 'modal', { animated })} {...props}>{children}</div>
-			</div>
-		) : null
-	)
+	render = () => {
+		const { children, animated, open, ...props } = this.props;
+		return (
+			open ? (
+				<div
+					onTouchStart={this.handleTouchStart}
+					onMouseDown={this.handleMouseDown}
+					className={createClassName(styles, 'modal__overlay')}
+				>
+					<div className={createClassName(styles, 'modal', { animated })} {...props}>{children}</div>
+				</div>
+			) : null
+		)
+	}
 }
 
 
@@ -69,8 +72,8 @@ export const ModalMessage = ({ children }) => (
 
 export const ConfirmationModal = ({
 	text,
-	confirmButtonText = I18n.t('Yes'),
-	cancelButtonText = I18n.t('No'),
+	confirmButtonText = ('Yes'),
+	cancelButtonText = ('No'),
 	onConfirm,
 	onCancel,
 	...props
@@ -85,7 +88,7 @@ export const ConfirmationModal = ({
 );
 
 
-export const AlertModal = ({ text, buttonText = I18n.t('OK'), onConfirm, ...props }) => (
+export const AlertModal = ({ text, buttonText = ('OK'), onConfirm, ...props }) => (
 	<Modal open animated dismissByOverlay={false} {...props}>
 		<Modal.Message>{text}</Modal.Message>
 		<ButtonGroup>

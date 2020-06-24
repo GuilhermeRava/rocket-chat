@@ -1,5 +1,5 @@
 import mem from 'mem';
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { createClassName } from '../helpers';
 import styles from './styles.scss';
@@ -172,8 +172,11 @@ export class Composer extends Component {
 		replaceCaret(el);
 	}
 
-	render = ({ pre, post, value, placeholder, onChange, onSubmit, onUpload, className, style }) => (
-		<div className={createClassName(styles, 'composer', { }, [className])} style={style}>
+	render = () => {
+		const { pre, post, value, placeholder, onChange, onSubmit, onUpload, className, style } = this.props;
+
+		return (
+			<div className={createClassName(styles, 'composer', { }, [className])} style={style}>
 			{pre}
 			<div
 				ref={this.handleRef}
@@ -185,16 +188,17 @@ export class Composer extends Component {
 						contentEditable: true,
 						'data-placeholder': placeholder,
 						onInput: this.handleInput(onChange),
-						onKeypress: this.handleKeypress(onSubmit),
+						onKeyPress: this.handleKeypress(onSubmit),
 						onPaste: this.handlePaste(onUpload),
 						onDrop: this.handleDrop(onUpload),
 					}
-				)}
-				className={createClassName(styles, 'composer__input')}
-			/>
+					)}
+					className={createClassName(styles, 'composer__input')}
+					/>
 			{post}
 		</div>
-	)
+	)	
+	}
 }
 
 export { ComposerAction } from './ComposerAction';

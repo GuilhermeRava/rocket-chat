@@ -2,7 +2,7 @@ import styles from './styles.scss';
 import Logo from './logo.svg';
 import { createClassName } from '../helpers';
 import { PopoverMenu } from '../Menu';
-
+import React from 'react';
 
 export const Footer = ({ children, className, ...props }) => (
 	<footer className={createClassName(styles, 'footer', {}, [className])} {...props}>
@@ -20,11 +20,11 @@ export const FooterContent = ({ children, className, ...props }) => (
 
 export const PoweredBy = ({ className, ...props }) => (
 	<h3 className={createClassName(styles, 'powered-by', {}, [className])} {...props}>
-		{I18n.t('Powered by Rocket.Chat').split('Rocket.Chat')[0]}
+		{('Powered by Rocket.Chat').split('Rocket.Chat')[0]}
 		<a href="https://rocket.chat" target="_blank" rel="noopener noreferrer">
 			<Logo className={createClassName(styles, 'powered-by__logo')} width={60} role="img" aria-label="Rocket.Chat" />
 		</a>
-		{I18n.t('Powered by Rocket.Chat').split('Rocket.Chat')[1]}
+		{('Powered by Rocket.Chat').split('Rocket.Chat')[1]}
 	</h3>
 );
 
@@ -33,7 +33,7 @@ const handleMouseUp = ({ target }) => target.blur();
 
 const OptionsTrigger = ({ pop }) => (
 	<button className={createClassName(styles, 'footer__options')} onClick={pop} onMouseUp={handleMouseUp}>
-		{I18n.t('Options')}
+		{('Options')}
 	</button>
 );
 
