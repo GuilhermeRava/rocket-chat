@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
 import { boolean, color } from '@storybook/addon-knobs';
 
+import React from 'react';
 
 export const screenCentered = (storyFn, ...args) => centered(() => (
 	<div style={{ display: 'flex', width: '365px', height: '500px' }}>
