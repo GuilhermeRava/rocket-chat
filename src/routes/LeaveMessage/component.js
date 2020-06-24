@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { Button } from '../../components/Button';
 import { ButtonGroup } from '../../components/ButtonGroup';
@@ -8,8 +8,8 @@ import { createClassName, sortArrayByColumn } from '../../components/helpers';
 import styles from './styles.scss';
 
 
-const defaultTitle = I18n.t('Leave a message');
-const defaultMessage = I18n.t('We are not online right now. Please, leave a message.');
+const defaultTitle = ('Leave a message');
+const defaultMessage = ('We are not online right now. Please, leave a message.');
 const defaultUnavailableMessage = ''; // TODO
 
 export default class LeaveMessage extends Component {
@@ -93,13 +93,13 @@ export default class LeaveMessage extends Component {
 				? (
 					<FormField
 						required
-						label={I18n.t('Name')}
+						label={('Name')}
 						error={name.showError && name.error}
 					>
 						<TextInput
 							name="name"
 							value={name.value}
-							placeholder={I18n.t('Insert your %{field} here...', { field: I18n.t('Name') })}
+							placeholder={('Insert your %{field} here...', { field: ('Name') })}
 							disabled={loading}
 							onInput={this.handleNameChange}
 						/>
@@ -111,13 +111,13 @@ export default class LeaveMessage extends Component {
 				? (
 					<FormField
 						required
-						label={I18n.t('Email')}
+						label={('Email')}
 						error={email.showError && email.error}
 					>
 						<TextInput
 							name="email"
 							value={email.value}
-							placeholder={I18n.t('Insert your %{field} here...', { field: I18n.t('Email') })}
+							placeholder={('Insert your %{field} here...', { field: ('Email') })}
 							disabled={loading}
 							onInput={this.handleEmailChange}
 						/>
@@ -128,14 +128,14 @@ export default class LeaveMessage extends Component {
 			{department
 				? (
 					<FormField
-						label={I18n.t('I need help with...')}
+						label={('I need help with...')}
 						error={department.showError && department.error}
 					>
 						<SelectInput
 							name="department"
 							value={department.value}
 							options={sortArrayByColumn(departments, 'name').map(({ _id, name }) => ({ value: _id, label: name }))}
-							placeholder={I18n.t('Choose an option...')}
+							placeholder={('Choose an option...')}
 							disabled={loading}
 							error={department.showError}
 							onInput={this.handleDepartmentChange}
@@ -148,7 +148,7 @@ export default class LeaveMessage extends Component {
 				? (
 					<FormField
 						required
-						label={I18n.t('Message')}
+						label={('Message')}
 						error={message.showError && message.error}
 					>
 						<TextInput
@@ -156,7 +156,7 @@ export default class LeaveMessage extends Component {
 							value={message.value}
 							multiline
 							rows={4}
-							placeholder={I18n.t('Write your message...')}
+							placeholder={('Write your message...')}
 							disabled={loading}
 							error={message.showError}
 							onInput={this.handleMessageChange}
@@ -166,7 +166,7 @@ export default class LeaveMessage extends Component {
 				: null}
 
 			<ButtonGroup>
-				<Button submit loading={loading} disabled={!valid || loading} stack>{I18n.t('Send')}</Button>
+				<Button submit loading={loading} disabled={!valid || loading} stack>{('Send')}</Button>
 			</ButtonGroup>
 		</Form>
 	)

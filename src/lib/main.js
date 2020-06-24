@@ -47,7 +47,7 @@ export const processUnread = async () => {
 
 		if (lastReadMessageIndex !== -1) {
 			const lastReadMessage = renderedMessages[lastReadMessageIndex];
-			const alertMessage = I18n.t({
+			const alertMessage = ({
 				one: 'One new message since %{since}',
 				other: '%{count} new messages since %{since}',
 			}, {

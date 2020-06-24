@@ -1,5 +1,5 @@
-import { Component } from 'preact';
-import { route } from 'preact-router';
+import React, { Component } from 'react';
+import { useHistory } from "react-router-dom";
 
 import { Livechat } from '../../api';
 import { parentCall } from '../../lib/parentCall';

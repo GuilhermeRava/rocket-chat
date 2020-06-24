@@ -2,6 +2,7 @@ import { loremIpsum } from 'lorem-ipsum';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+import React from 'react';
 
 import { screenCentered, screenProps } from '../../helpers.stories';
 import ChatFinished from './component';

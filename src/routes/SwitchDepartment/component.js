@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { Button } from '../../components/Button';
 import { ButtonGroup } from '../../components/ButtonGroup';
@@ -8,8 +8,8 @@ import { createClassName } from '../../components/helpers';
 import styles from './styles.scss';
 
 
-const defaultTitle = I18n.t('Change Department');
-const defaultMessage = I18n.t('Choose a department');
+const defaultTitle = ('Change Department');
+const defaultMessage = ('Choose a department');
 
 export default class SwitchDepartment extends Component {
 	state = {
@@ -90,14 +90,14 @@ export default class SwitchDepartment extends Component {
 
 					<Form onSubmit={this.handleSubmit}>
 						<FormField
-							label={I18n.t('Departments')}
+							label={('Departments')}
 							error={department && department.showError && department.error}
 						>
 							<SelectInput
 								name="department"
 								value={department && department.value}
 								options={departments.map(({ _id, name }) => ({ value: _id, label: name }))}
-								placeholder={I18n.t('Choose a department...')}
+								placeholder={('Choose a department...')}
 								disabled={loading}
 								error={department && department.showError}
 								onInput={this.handleDepartmentChange}
@@ -105,8 +105,8 @@ export default class SwitchDepartment extends Component {
 						</FormField>
 
 						<ButtonGroup>
-							<Button submit loading={loading} disabled={!valid || loading} stack>{I18n.t('Start chat')}</Button>
-							<Button disabled={loading} stack secondary nude onClick={this.handleCancelClick}>{I18n.t('Cancel')}</Button>
+							<Button submit loading={loading} disabled={!valid || loading} stack>{('Start chat')}</Button>
+							<Button disabled={loading} stack secondary nude onClick={this.handleCancelClick}>{('Cancel')}</Button>
 						</ButtonGroup>
 					</Form>
 				</Screen.Content>

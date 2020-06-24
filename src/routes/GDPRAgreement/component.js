@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 import MarkdownIt from 'markdown-it';
 
 import { Button } from '../../components/Button';
@@ -13,15 +13,20 @@ const md = new MarkdownIt({
 	typographer: false,
 });
 
-const defaultConsentText = I18n.t(
-	'The controller of your personal data is [Company Name], with registered '
+// const defaultConsentText = (
+// 	'The controller of your personal data is [Company Name], with registered '
+// 	+ 'office at [Company Address]. To start the chat you agree that your '
+// 	+ 'personal data shall be processed and trasmitted in accordance with the General Data Protection Regulation (GDPR).'
+// );
+const defaultConsentText = "I'The controller of your personal data is [Company Name], with registered '"
 	+ 'office at [Company Address]. To start the chat you agree that your '
-	+ 'personal data shall be processed and trasmitted in accordance with the General Data Protection Regulation (GDPR).'
-);
+	+ 'personal data shall be processed and trasmitted in accordance with the General Data Protection Regulation (GDPR).';
 
-const defaultInstructions = I18n.t(
+const defaultInstructions =
 	'Go to **menu options → Forget/Remove my personal data** to request the immediate removal of your data.'
-);
+// const defaultInstructions = (
+// 	'Go to **menu options → Forget/Remove my personal data** to request the immediate removal of your data.'
+// );
 
 export default class GDPR extends Component {
 	handleClick = () => {
@@ -57,7 +62,8 @@ export default class GDPR extends Component {
 				/>
 
 				<ButtonGroup>
-					<Button onClick={this.handleClick} stack>{ I18n.t('I Agree') }</Button>
+					<Button onClick={this.handleClick} stack>I Agree</Button>
+					{/* <Button onClick={this.handleClick} stack>{ ('I Agree') }</Button> */}
 				</ButtonGroup>
 			</Screen.Content>
 			<Screen.Footer />

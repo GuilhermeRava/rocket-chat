@@ -1,5 +1,5 @@
-import { Component } from 'preact';
-import { route } from 'preact-router';
+import React, { Component } from 'react';
+import { useHistory } from "react-router-dom";
 
 import { Consumer } from '../../store';
 import GDPRAgreement from './component';
@@ -45,10 +45,22 @@ export const GDPRConnector = ({ ref, ...props }) => (
 					fontColor: customFontColor,
 					iconColor: customIconColor,
 				}}
-				title={I18n.t('GDPR')}
+				title={'GDPR'}
 				dispatch={dispatch}
 				consentText={consentText}
 			/>
+			// <GDPRContainer
+			// 	ref={ref}
+			// 	{...props}
+			// 	theme={{
+			// 		color: customColor || color,
+			// 		fontColor: customFontColor,
+			// 		iconColor: customIconColor,
+			// 	}}
+			// 	title={('GDPR')}
+			// 	dispatch={dispatch}
+			// 	consentText={consentText}
+			// />
 		)}
 	</Consumer>
 );

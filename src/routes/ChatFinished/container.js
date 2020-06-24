@@ -1,5 +1,5 @@
-import { Component } from 'preact';
-import { route } from 'preact-router';
+import React, { Component } from 'react';
+import { useHistory } from "react-router-dom";
 
 import { Consumer } from '../../store';
 import ChatFinished from './component';
@@ -44,10 +44,22 @@ export const ChatFinishedConnector = ({ ref, ...props }) => (
 					fontColor: customFontColor,
 					iconColor: customIconColor,
 				}}
-				title={I18n.t('Chat Finished')}
+				title={'Chat Finished'}
 				greeting={greeting}
 				message={message}
 			/>
+			// <ChatFinishedContainer
+			// 	ref={ref}
+			// 	{...props}
+			// 	theme={{
+			// 		color: customColor || color,
+			// 		fontColor: customFontColor,
+			// 		iconColor: customIconColor,
+			// 	}}
+			// 	title={('Chat Finished')}
+			// 	greeting={greeting}
+			// 	message={message}
+			// />
 		)}
 	</Consumer>
 );

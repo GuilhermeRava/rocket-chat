@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { Composer, ComposerAction, ComposerActions } from '../../components/Composer';
 import { FilesDropTarget } from '../../components/FilesDropTarget';
@@ -96,7 +96,7 @@ export default class Chat extends Component {
 	}) => (
 		<Screen
 			color={color}
-			title={title || I18n.t('Need help?')}
+			title={title || ('Need help?')}
 			fontColor={fontColor}
 			agent={agent || null}
 			queueInfo={queueInfo}
@@ -110,7 +110,7 @@ export default class Chat extends Component {
 			<FilesDropTarget
 				ref={this.handleFilesDropTargetRef}
 				overlayed
-				overlayText={I18n.t('Drop here to upload a file')}
+				overlayText={('Drop here to upload a file')}
 				onUpload={onUpload}
 			>
 				<Screen.Content nopadding>
@@ -132,13 +132,13 @@ export default class Chat extends Component {
 						<FooterOptions>
 							<Menu.Group>
 								{onChangeDepartment && (
-									<Menu.Item onClick={onChangeDepartment} icon={ChangeIcon}>{I18n.t('Change department')}</Menu.Item>
+									<Menu.Item onClick={onChangeDepartment} icon={ChangeIcon}>{('Change department')}</Menu.Item>
 								)}
 								{onRemoveUserData && (
-									<Menu.Item onClick={onRemoveUserData} icon={RemoveIcon}>{I18n.t('Forget/Remove my data')}</Menu.Item>
+									<Menu.Item onClick={onRemoveUserData} icon={RemoveIcon}>{('Forget/Remove my data')}</Menu.Item>
 								)}
 								{onFinishChat && (
-									<Menu.Item danger onClick={onFinishChat} icon={FinishIcon}>{I18n.t('Finish this chat')}</Menu.Item>
+									<Menu.Item danger onClick={onFinishChat} icon={FinishIcon}>{('Finish this chat')}</Menu.Item>
 								)}
 							</Menu.Group>
 						</FooterOptions>
@@ -147,7 +147,7 @@ export default class Chat extends Component {
 					<Composer onUpload={onUpload}
 						onSubmit={this.handleSubmit}
 						onChange={this.handleChangeText}
-						placeholder={I18n.t('Type your message here')}
+						placeholder={('Type your message here')}
 						value={text}
 						pre={emoji && (
 							<ComposerActions>

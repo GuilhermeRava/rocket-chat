@@ -1,4 +1,4 @@
-import { route } from 'preact-router';
+import { useHistory } from "react-router-dom";
 
 import { Livechat } from '../api';
 import { store } from '../store';

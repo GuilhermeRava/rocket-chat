@@ -4,6 +4,7 @@ import { withKnobs, boolean, number, object, text } from '@storybook/addon-knobs
 
 import { screenCentered, screenProps, avatarResolver } from '../../helpers.stories';
 import Chat from './component';
+import React from 'react';
 
 
 const agent = {

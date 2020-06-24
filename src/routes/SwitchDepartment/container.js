@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { Livechat } from '../../api';
 import { loadConfig } from '../../lib/main';
@@ -11,7 +11,7 @@ import history from '../../history';
 export class SwitchDepartmentContainer extends Component {
 	confirmChangeDepartment = async () => {
 		const result = await ModalManager.confirm({
-			text: I18n.t('Are you sure you want to switch the department?'),
+			text: ('Are you sure you want to switch the department?'),
 		});
 
 		return typeof result.success === 'boolean' && result.success;
@@ -28,7 +28,7 @@ export class SwitchDepartmentContainer extends Component {
 
 		if (!room) {
 			const user = await Livechat.grantVisitor({ visitor: { department, token } });
-			await dispatch({ user, alerts: (alerts.push({ id: createToken(), children: I18n.t('Department switched'), success: true }), alerts) });
+			await dispatch({ user, alerts: (alerts.push({ id: createToken(), children: ('Department switched'), success: true }), alerts) });
 			return history.go(-1);
 		}
 
@@ -38,20 +38,20 @@ export class SwitchDepartmentContainer extends Component {
 			const result = await Livechat.transferChat({ rid, department });
 			const { success } = result;
 			if (!success) {
-				throw I18n.t('No available agents to transfer');
+				throw ('No available agents to transfer');
 			}
 
 			await dispatch({ department });
 			await loadConfig();
 
 			await ModalManager.alert({
-				text: I18n.t('Department switched'),
+				text: ('Department switched'),
 			});
 
 			history.go(-1);
 		} catch (error) {
 			console.error(error);
-			await dispatch({ alerts: (alerts.push({ id: createToken(), children: I18n.t('No available agents to transfer'), warning: true }), alerts) });
+			await dispatch({ alerts: (alerts.push({ id: createToken(), children: ('No available agents to transfer'), warning: true }), alerts) });
 		} finally {
 			await dispatch({ loading: false });
 		}

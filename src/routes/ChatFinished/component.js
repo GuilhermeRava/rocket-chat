@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import React, { Component } from 'react';
 
 import { Button } from '../../components/Button';
 import { ButtonGroup } from '../../components/ButtonGroup';
@@ -6,8 +6,11 @@ import Screen from '../../components/Screen';
 import { createClassName } from '../../components/helpers';
 import styles from './styles.scss';
 
-const defaultGreeting = I18n.t('Thanks for talking with us');
-const defaultMessage = I18n.t('If you have any other questions, just press the button below to start a new chat.');
+// const defaultGreeting = ('Thanks for talking with us');
+// const defaultMessage = ('If you have any other questions, just press the button below to start a new chat.');
+
+const defaultGreeting = 'Thanks for talking with us'
+const defaultMessage = 'If you have any other questions, just press the button below to start a new chat.';
 
 export default class ChatFinished extends Component {
 	handleClick = () => {
@@ -35,7 +38,8 @@ export default class ChatFinished extends Component {
 				<p className={createClassName(styles, 'chat-finished__message')}>{message || defaultMessage}</p>
 
 				<ButtonGroup>
-					<Button onClick={this.handleClick} stack>{ I18n.t('New Chat') }</Button>
+					<Button onClick={this.handleClick} stack>new chat</Button>
+					{/* <Button onClick={this.handleClick} stack>{ ('New Chat') }</Button> */}
 				</ButtonGroup>
 			</Screen.Content>
 			<Screen.Footer />

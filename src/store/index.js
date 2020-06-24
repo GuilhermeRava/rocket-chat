@@ -1,5 +1,4 @@
-import { Component } from 'preact';
-import { createContext } from 'preact-context';
+import React, { Component } from 'react';
 
 import { createToken } from '../components/helpers';
 import Store from './Store';
@@ -48,7 +47,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 
-const StoreContext = createContext();
+const StoreContext = React.createContext();
 
 export class Provider extends Component {
 	static displayName = 'StoreProvider'

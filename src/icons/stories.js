@@ -1,5 +1,5 @@
 import path from 'path';
-
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import centered from '@storybook/addon-centered/react';
 import { withKnobs, color } from '@storybook/addon-knobs';
@@ -36,7 +36,7 @@ storiesOf('Components|Icons', module)
 	.addDecorator(withKnobs)
 	.add('all', () => (
 		<div style={{ width: '100%', display: 'flex', flexWrap: 'wrap' }}>
-			{iconset.map((props) => <IconDisplay color={color('color', '#E0364D')} {...props} />)}
+			{iconset.map((props, key) => <IconDisplay key={key} color={color('color', '#E0364D')} {...props} />)}
 		</div>
 	));
 iconset.forEach(({ component: Icon, name }) =>

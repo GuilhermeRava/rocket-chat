@@ -1,5 +1,5 @@
-import { Component } from 'preact';
-import { route } from 'preact-router';
+import React, { Component } from 'react';
+import { useHistory } from "react-router-dom";
 
 import { Livechat } from '../../api';
 import { Consumer } from '../../store';
@@ -78,7 +78,7 @@ export class ChatContainer extends Component {
 			return newRoom;
 		} catch (error) {
 			const { data: { error: reason } } = error;
-			const alert = { id: createToken(), children: I18n.t('Error starting a new conversation: %{reason}', { reason }), error: true, timeout: 10000 };
+			const alert = { id: createToken(), children: ('Error starting a new conversation: %{reason}', { reason }), error: true, timeout: 10000 };
 			await dispatch({ loading: false, alerts: (alerts.push(alert), alerts) });
 
 			runCallbackEventEmitter(reason);
@@ -141,13 +141,13 @@ export class ChatContainer extends Component {
 		} catch (error) {
 			const { data: { reason, sizeAllowed } } = error;
 
-			let message = I18n.t('FileUpload Error');
+			let message = ('FileUpload Error');
 			switch (reason) {
 				case 'error-type-not-allowed':
-					message = I18n.t('Media Types Not Accepted.');
+					message = ('Media Types Not Accepted.');
 					break;
 				case 'error-size-not-allowed':
-					message = I18n.t('File exceeds allowed size of %{size}.', { size: sizeAllowed });
+					message = ('File exceeds allowed size of %{size}.', { size: sizeAllowed });
 			}
 
 			const alert = { id: createToken(), children: message, error: true, timeout: 5000 };
@@ -173,7 +173,7 @@ export class ChatContainer extends Component {
 
 	onFinishChat = async () => {
 		const { success } = await ModalManager.confirm({
-			text: I18n.t('Are you sure you want to finish this chat?'),
+			text: ('Are you sure you want to finish this chat?'),
 		});
 
 		if (!success) {
@@ -189,7 +189,7 @@ export class ChatContainer extends Component {
 			}
 		} catch (error) {
 			console.error(error);
-			const alert = { id: createToken(), children: I18n.t('Error closing chat.'), error: true, timeout: 0 };
+			const alert = { id: createToken(), children: ('Error closing chat.'), error: true, timeout: 0 };
 			await dispatch({ alerts: (alerts.push(alert), alerts) });
 		} finally {
 			await dispatch({ loading: false });
@@ -199,7 +199,7 @@ export class ChatContainer extends Component {
 
 	onRemoveUserData = async () => {
 		const { success } = await ModalManager.confirm({
-			text: I18n.t('Are you sure you want to remove all of your personal data?'),
+			text: ('Are you sure you want to remove all of your personal data?'),
 		});
 
 		if (!success) {
@@ -213,7 +213,7 @@ export class ChatContainer extends Component {
 			await Livechat.deleteVisitor();
 		} catch (error) {
 			console.error(error);
-			const alert = { id: createToken(), children: I18n.t('Error removing user data.'), error: true, timeout: 0 };
+			const alert = { id: createToken(), children: ('Error removing user data.'), error: true, timeout: 0 };
 			await dispatch({ alerts: (alerts.push(alert), alerts) });
 		} finally {
 			await loadConfig();
@@ -248,7 +248,7 @@ export class ChatContainer extends Component {
 		if (connecting) {
 			alerts.push({
 				id: connectingAgentAlertId,
-				children: message || I18n.t('Please, wait for the next available agent..'),
+				children: message || ('Please, wait for the next available agent..'),
 				warning: true,
 				hideCloseButton: true,
 				timeout: 0,
@@ -385,7 +385,7 @@ export const ChatConnector = ({ ref, ...props }) => (
 					iconColor: customIconColor,
 					title: customTitle,
 				}}
-				title={customTitle || title || I18n.t('Need help?')}
+				title={customTitle || title || ('Need help?')}
 				sound={sound}
 				token={token}
 				user={user}
@@ -413,7 +413,7 @@ export const ChatConnector = ({ ref, ...props }) => (
 				dispatch={dispatch}
 				departments={departments}
 				allowSwitchingDepartments={allowSwitchingDepartments}
-				conversationFinishedMessage={conversationFinishedMessage || I18n.t('Conversation finished')}
+				conversationFinishedMessage={conversationFinishedMessage || ('Conversation finished')}
 				allowRemoveUserData={allowRemoveUserData}
 				alerts={alerts}
 				visible={visible}
