@@ -15,8 +15,8 @@
 		"build:widget": "webpack-cli src/widget.js -o build/rocketchat-livechat.min.js --mode production",
 		"build:pack": "cp widget-demo.html ./build && tar -C build -czf build.tar.gz '.'",
 		"build": "run-s build:app build:widget build:pack",
-		"serve": "preact build --no-prerender --optimize-minimize && preact serve",
-		"dev": "preact watch",
+		"dev": "webpack-dev-server --config .storybook/webpack.config.js --progress --colors",
+		"webpack": "webpack --watch --config .storybook/webpack.config.js",
 		"lint": "run-s eslint stylelint",
 		"eslint": "eslint src",
 		"stylelint": "stylelint 'src/**/*.scss'",
@@ -29,6 +29,8 @@
 		"release": "gh-release -c master --assets build.tar.gz"
 	},
 	"devDependencies": {
+		"@babel/plugin-proposal-class-properties": "^7.10.1",
+		"@babel/preset-react": "^7.10.1",
 		"@rocket.chat/eslint-config": "^0.4.0",
 		"@storybook/addon-a11y": "^5.1.9",
 		"@storybook/addon-actions": "^5.1.9",
@@ -45,6 +47,7 @@
 		"desvg-loader": "^0.1.0",
 		"eslint": "^6.5.1",
 		"eslint-config-synacor": "^3.0.5",
+		"file-loader": "^6.0.0",
 		"gh-release": "^3.5.0",
 		"husky": "^3.0.8",
 		"identity-obj-proxy": "^3.0.0",
@@ -54,20 +57,22 @@
 		"lorem-ipsum": "^2.0.3",
 		"node-sass": "^4.9.3",
 		"npm-run-all": "^4.1.5",
-		"preact-cli": "3.0.0-next.14",
-		"preact-compat": "^3.18.4",
-		"preact-render-spy": "^1.2.1",
 		"sass-loader": "^7.1.0",
 		"style-loader": "^0.23.1",
 		"stylelint": "^11.1.1",
 		"stylelint-order": "^3.1.1",
 		"svg-loader": "0.0.2",
+		"webpack": "^4.43.0",
 		"webpack-bundle-analyzer": "^3.0.2",
-		"webpack-cli": "^3.2.1"
+		"webpack-cli": "^3.3.12",
+		"webpack-dev-server": "^3.11.0"
 	},
 	"dependencies": {
+		"@babel/core": "^7.10.3",
+		"@babel/preset-env": "^7.10.3",
 		"@kossnocorp/desvg": "^0.2.0",
 		"@rocket.chat/sdk": "^1.0.0-alpha.29",
+		"babel-loader": "^8.1.0",
 		"date-fns": "^2.4.1",
 		"desvg": "^1.0.2",
 		"fast-async": "^6.3.8",
@@ -77,11 +82,10 @@
 		"markdown-it": "^10.0.0",
 		"mem": "^5.1.1",
 		"msgpack": "^1.0.2",
-		"preact": "^8.2.6",
-		"preact-context": "^1.1.1",
-		"preact-i18nline": "^2.0.0",
-		"preact-router": "^2.5.7",
 		"query-string": "6.8.3",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"react-router-dom": "^5.2.0",
 		"tiny-events": "^1.0.1",
 		"wolfy87-eventemitter": "^5.2.5"
 	},
@@ -101,12 +105,7 @@
 		"moduleNameMapper": {
 			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/tests/__mocks__/fileMock.js",
 			"\\.(css|less|scss)$": "identity-obj-proxy",
-			"^./style$": "identity-obj-proxy",
-			"^preact$": "<rootDir>/node_modules/preact/dist/preact.min.js",
-			"^react$": "preact-compat",
-			"^react-dom$": "preact-compat",
-			"^create-react-class$": "preact-compat/lib/create-react-class",
-			"^react-addons-css-transition-group$": "preact-css-transition-group"
+			"^./style$": "identity-obj-proxy"
 		}
 	},
 	"browserslist": [
